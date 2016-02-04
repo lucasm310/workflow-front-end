@@ -1,2 +1,2 @@
 var body = document.body;
-body.style.color = 'red';
+body.style.color = 'blue';
