@@ -1,0 +1,33 @@
+body{
+    background: #ccc;    
+    font-family: arial, sans-serif;
+}
+
+.mainHeader{
+    color: #bbb;
+    text-shadow: 2px 2px 1px rgba(0,0,0,.6);
+}
+
+.buttonsContainer{
+    border-top: 2px solid #A5A5A5;
+}
+
+.buttonsContainer .buttonsContainer__button{
+    background-image: linear-gradient(to top, #848484, #AFAFAF);
+    border: none;
+    padding: 1em;
+    margin: 1em 0;
+    cursor: pointer;
+    outline: none;
+}
+
+.buttonsContainer .buttonsContainer__button:hover{
+    background-image: linear-gradient(to top, #AFAFAF, #848484);
+}
+.buttonsContainer .buttonsContainer__button:active{
+    background-image: linear-gradient(to top, #868686, #565656);
+}
+
+.buttonsContainer .buttonsContainer__result--number{
+    font-weight: bold;
+}
