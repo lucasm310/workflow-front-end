@@ -1,8 +1,32 @@
-<html>
-	<head>
-		<title>Index</title>
-	</head>
-	<body>
-		<h1>Index</h1>
-	</body>
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8">
+        <title>Exemplo de Task Runner</title>
+        <script src="vendor/modernizr.min.js"></script>
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <header class="mainHeader">
+            <h1 class="mainHeader__title">Exemplo de utilização do GruntJS</h1>    
+        </header>
+
+        <main role="main">
+
+            <div class="dateContainer">
+                <p class="dateContainer__content" id="containerDate"></p>
+            </div>
+
+            <div class="buttonsContainer">
+                <button id="incrementButton" class="buttonsContainer__button">Clica para incrementar</button>
+                <div id="resultIncrementButton" class="buttonsContainer__result">Clicado <span class="buttonsContainer__result--number js-result">0</span> vezes</div>
+            </div>        
+
+
+        </main>
+
+
+        <script src="javascript/app.min.js"></script>
+        
+    </body>
 </html>
