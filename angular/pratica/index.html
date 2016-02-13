@@ -1,0 +1,136 @@
+<html ng-app="cardapio">
+<head>
+	<meta charset="UTF-8">
+	<title>Cardapio</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.5.0/angular-messages.js"></script>
+	<script src="app.js"></script>
+	<style>
+	.thumbnail {
+		margin-top: 20px;
+		padding-top: 10px;
+	}
+	.edit {
+		float: left;
+		margin-right: 6px;
+	}
+
+	.principal {
+		margin-top: 30px;
+	}
+
+	</style>
+</head>
+<body ng-controller="cardapioCtrl">
+	<div class="container">
+		<div class="principal">
+			<a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"> Mostrar Cardapio </a>
+			<div class="collapse" id="collapseExample">
+				<div class="jumbotron">
+					<table class="table">
+						<tr>
+							<th>Produto</th>
+							<th>Valor</th>
+						</tr>
+						<tr ng-repeat="produto in produtos">
+							<th>{{produto.nome}}</th>
+							<th>{{produto.valor | number:2}}</th>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="thumbnail">
+				<form class="form-inline" name="pedidoForm">
+					<div class="form-group edit">
+						<input class="form-control" type="text" ng-model="pedido.qtd" name="qtd" placeholder="Qtd" ng-required="true" aria-describedby="erro"/>
+						<p id="erro" class="text-danger" ng-show="pedidoForm.qtd.$error.required">Por favor digite digite a quantidade.</p>
+					</div>
+					<div class="form-group edit">
+						<select class="form-control" ng-model="pedido.produto" ng-options="produto.nome group by produto.categoria for produto in produtos" ng-required="true" aria-describedby="erro">
+							<option value="">Selecione um produto</option>
+						</select>
+						<p id="erro" class="text-danger" ng-show="pedidoForm.produto.$invalid">Por favor selecione um produto.</p>
+					</div>
+					<button class="btn btn-primary" ng-click="adicionarProduto(pedido)" ng-disabled="pedidoForm.$invalid">Adicionar Produto</button>
+				</form>
+				
+				<form name="infoForm">
+					<div class="form-group">
+						<input class="form-control" type="text" ng-model="endereco" name="endereco" placeholder="Endereço" ng-required="true"/>
+						<p id="erro" class="text-danger" ng-show="infoForm.endereco.$error.required">Por favor digite o endereço.</p>
+					</div>
+					<div class="form-group">
+						<select class="form-control" ng-model="pgto" ng-options="pgto.forma as pgto.forma for pgto in pgtos" ng-required="true">
+							<option value="">Selecione a forma de pagamento</option>
+						</select>
+						<p id="erro" class="text-danger" ng-show="infoForm.pgto.$error.required">Por favor selecione a forma de pagamento.</p>
+					</div>
+				</form>
+			</div>
+			<table class="table">
+				<tr>
+					<th></th>
+					<th>Qtd</th>
+					<th>Produto</th>
+					<th>Valor</th>
+					<th>Total</th>
+				</tr>
+				<tr ng-repeat="pedido in pedidos" ng-init="setTotals(pedido)">
+					<td><input type="checkbox" ng-model="pedido.selecionado"/></td>
+					<th>{{pedido.qtd}}</th>
+					<th>{{pedido.produto.nome}}</th>
+					<th>{{pedido.produto.valor | number:2}}</th>
+					<th>{{pedido.total | number:2}}</th>
+				</tr>
+				<tfoot>
+			            <tr class="bg-warning">
+			                <td>Total</td>
+			                <td></td>
+			                <td></td>
+			                <td></td>                    
+			                <td>{{invoiceTotal | number:2}}</td>
+			            </tr>
+			        </tfoot>
+			</table>
+			<button class="btn btn-danger" ng-click="apagarPedidos(pedidos)" ng-if="isPedidoSelecionado(pedidos)">Apagar Item</button>
+
+
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" ng-disabled="infoForm.$invalid">Gerar pedido</button>
+
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel">Pedido</h4>
+			      </div>
+			      <div class="modal-body">
+			      	<h4> Copie e cole o texto abaixo na chat do facebook para agilizar o pedido!</h4>
+			      	<div class="thumbnail">
+				      	<ul>
+				      		<li ng-repeat="pedido in pedidos">{{pedido.qtd}} - {{pedido.produto.nome}}</li>
+				      	</ul>
+				      	<p> Valor total: <b>R$ {{invoiceTotal | number:2}}</b></p>
+				        <p> Endereço: <span ng-bind="endereco"></span></p>
+						<p> Forma de pagamento: <span ng-bind="pgto"></span></p>
+					</div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+			        <a class="btn btn-primary" role="button" href="https://www.facebook.com/yoculinaria">Facebook</a>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+
+		<div ng-include="'footer.html'"></div>
+	</div>
+</body>
+</html>
