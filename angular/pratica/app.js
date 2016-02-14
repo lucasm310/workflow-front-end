@@ -73,6 +73,11 @@ angular.module("cardapio").controller("cardapioCtrl", function ($scope) {
 		//Bandeija
 		{nome: "Bandeija SushiJoe", valor: "40", categoria: "Bandeija"}
 		];
+	/*Alterar abaixo o valor sendo que tem quer ser no padrão (3.00)
+	Alterar abaixo ativo com sim ou não (para promoção)*/
+	$scope.entrega = {valor: 3.40, ativo: "sim"};
+
+/*-------------------------------------------------------------------------------------------------------------*/
 
 	//Não Aterar abaixo.
 	$scope.pedidos = [
@@ -89,6 +94,9 @@ angular.module("cardapio").controller("cardapioCtrl", function ($scope) {
 	
 	$scope.invoiceCount = 0;
     $scope.invoiceTotal = 0;
+    if ($scope.entrega.ativo == 'sim') {
+    	$scope.invoiceTotal += $scope.entrega.valor;
+    }
 
     $scope.setTotals = function(pedido){
         if (pedido){
@@ -99,12 +107,13 @@ angular.module("cardapio").controller("cardapioCtrl", function ($scope) {
     };
     $scope.apagarPedidos = function (pedidos) {
 		$scope.pedidos = pedidos.filter(function (pedido) {
-			$scope.invoiceTotal -= pedido.total;
 			if (!pedido.selecionado) return pedido;
+			$scope.invoiceTotal -= pedido.total;
 		});
 	};
 	$scope.isPedidoSelecionado = function (pedidos) {
 		return pedidos.some(function (pedido) {
+
 			return pedido.selecionado;
 		});
 	};

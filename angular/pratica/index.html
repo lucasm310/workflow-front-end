@@ -23,9 +23,31 @@
 		margin-top: 30px;
 	}
 
+	.alert {
+		margin-top: 20px;
+	}
+	body { 
+		padding-top: 70px; 
+	}
+	.navbar-default {
+		background-color: #fff;
+		color: #000;
+		font-weight: bold;
+	}
+
 	</style>
 </head>
 <body ng-controller="cardapioCtrl">
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container-fluid">
+		<h4 class="navbar-text"><a href="#" class="navbar-link">Yo Culinaria Oriental</a></h4>
+		<p class="navbar-text navbar-right">Atendimento de Segunda a Sábado Almoço 10:00 as 14:00 Jantar 18:00 as 22:00 </p>
+		</div>
+		
+	</nav>
+		
+		
 	<div class="container">
 		<div class="principal">
 			<a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"> Mostrar Cardapio </a>
@@ -43,6 +65,13 @@
 					</table>
 				</div>
 			</div>
+
+				<div ng-show="entrega.ativo == 'sim'" class="alert alert-info"> 
+					Taxa de entrega de R$ {{entrega.valor | number:2}}	
+				</div>
+				<div ng-show="entrega.ativo == 'nao'" class="alert alert-success">
+					PROMOÇÃOOOO! <b>Taxa de entrega gratuita!</b>
+				</div>
 			<div class="thumbnail">
 				<form class="form-inline" name="pedidoForm">
 					<div class="form-group edit">
@@ -97,6 +126,7 @@
 			        </tfoot>
 			</table>
 			<button class="btn btn-danger" ng-click="apagarPedidos(pedidos)" ng-if="isPedidoSelecionado(pedidos)">Apagar Item</button>
+
 
 
 			<!-- Button trigger modal -->
