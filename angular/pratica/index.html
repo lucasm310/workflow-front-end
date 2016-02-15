@@ -8,6 +8,8 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.5.0/angular-messages.js"></script>
+	<script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
+	<script src="ngclipboard.min.js"></script>
 	<script src="app.js"></script>
 	<style>
 	.thumbnail {
@@ -147,7 +149,7 @@
 			      </div>
 			      <div class="modal-body">
 			      	<h4> Seu pedido ainda não foi Finalizado !!<br> Para finalizar, Copie e Cole o texto abaixo no Chat do Facebook!</h4>
-			      	<div class="thumbnail">
+			      	<div class="thumbnail" id="pedido">
 				      	<ul>
 				      		<li ng-repeat="pedido in pedidos">{{pedido.qtd}} - {{pedido.produto.nome}} {{pedido.produto.valor}}.00</li>
 				      	</ul>
@@ -159,6 +161,7 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+			        <button class="btn btn-default" ngclipboard data-clipboard-target="#pedido">Copiar pedido</button>
 			        <a class="btn btn-primary" target="_blank" role="button" href="https://www.facebook.com/yoculinaria">Facebook</a>
 			      </div>
 			    </div>

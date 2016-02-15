@@ -1,4 +1,4 @@
-angular.module("cardapio", []);
+angular.module("cardapio", ["ngclipboard"]);
 angular.module("cardapio").controller("cardapioCtrl", function ($scope) {
 	$scope.app = "Cardapio";
 	//Alterar os produtos mas manter a formação
