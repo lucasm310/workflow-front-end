@@ -2,6 +2,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Cardapio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
@@ -142,7 +144,7 @@
 			<!-- Modal -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
+			    <div class="modal-content col-xs-12">
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			        <h4 class="modal-title" id="myModalLabel">Pedido</h4>
@@ -159,10 +161,15 @@
 						<p ng-show="troco">Troco para: R$ <span ng-bind="troco"></span></p>
 					</div>
 			      </div>
-			      <div class="modal-footer">
+			      <div class="modal-footer hidden-xs">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
 			        <button class="btn btn-default" ngclipboard data-clipboard-target="#pedido">Copiar pedido</button>
 			        <a class="btn btn-primary" target="_blank" role="button" href="https://www.facebook.com/yoculinaria">Facebook</a>
+			      </div>
+			      <div class="modal-footer visible-xs">
+			        <button type="button" class="btn btn-default btn-block" data-dismiss="modal">Fechar</button>
+			        <button class="btn btn-default btn-block" ngclipboard data-clipboard-target="#pedido">Copiar pedido</button>
+			        <a class="btn btn-primary btn-block" target="_blank" role="button" href="https://www.facebook.com/yoculinaria">Facebook</a>
 			      </div>
 			    </div>
 			  </div>
