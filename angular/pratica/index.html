@@ -7,10 +7,10 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.5.0/angular-messages.js"></script>
 	<script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-i18n/1.5.0/angular-locale_pt-br.js"></script>
 	<script src="ngclipboard.min.js"></script>
 	<script src="app.js"></script>
 	<style>
@@ -64,14 +64,14 @@
 						</tr>
 						<tr ng-repeat="produto in produtos">
 							<th>{{produto.nome}}</th>
-							<th>{{produto.valor | number:2}}</th>
+							<th>{{produto.valor | currency}}</th>
 						</tr>
 					</table>
 				</div>
 			</div>
 
 				<div ng-show="entrega.ativo == 'sim'" class="alert alert-info"> 
-					Taxa de entrega de R$ {{entrega.valor | number:2}}	
+					Taxa de entrega de {{entrega.valor | currency}}	
 				</div>
 				<div ng-show="entrega.ativo == 'nao'" class="alert alert-success">
 					PROMOÇÃO! <b>TAXA DE ENTREGA GRATUITA ! 15/02</b>
@@ -121,8 +121,8 @@
 					<td><input type="checkbox" ng-model="pedido.selecionado"/></td>
 					<th>{{pedido.qtd}}</th>
 					<th>{{pedido.produto.nome}}</th>
-					<th>{{pedido.produto.valor | number:2}}</th>
-					<th>{{pedido.total | number:2}}</th>
+					<th>{{pedido.produto.valor | currency}}</th>
+					<th>{{pedido.total | currency}}</th>
 				</tr>
 				<tfoot>
 			            <tr class="bg-warning">
@@ -130,7 +130,7 @@
 			                <td></td>
 			                <td></td>
 			                <td></td>                    
-			                <td>{{invoiceTotal | number:2}}</td>
+			                <td>{{invoiceTotal | currency}}</td>
 			            </tr>
 			        </tfoot>
 			</table>
@@ -153,12 +153,12 @@
 			      	<h4> Seu pedido ainda não foi Finalizado !!<br> Para finalizar, Copie e Cole o texto abaixo no Chat do Facebook!</h4>
 			      	<div class="thumbnail" id="pedido">
 				      	<ul>
-				      		<li ng-repeat="pedido in pedidos">{{pedido.qtd}} - {{pedido.produto.nome}} {{pedido.produto.valor}}.00</li>
+				      		<li ng-repeat="pedido in pedidos">{{pedido.qtd}} - {{pedido.produto.nome}} {{pedido.produto.valor | currency}}</li>
 				      	</ul>
-				      	<p> Valor total: <b>R$ {{invoiceTotal | number:2}}</b></p>
+				      	<p> Valor total: <b>{{invoiceTotal | currency}}</b></p>
 				        <p> Endereço: <span ng-bind="endereco"></span></p>
 						<p> Forma de pagamento: <span ng-bind="pgto"></span></p>
-						<p ng-show="troco">Troco para: R$ <span ng-bind="troco"></span></p>
+						<p ng-show="troco">Troco para: <span ng-bind="troco | currency"></span></p>
 					</div>
 			      </div>
 			      <div class="modal-footer hidden-xs">
