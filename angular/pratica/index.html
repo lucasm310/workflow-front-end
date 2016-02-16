@@ -10,6 +10,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.5.0/angular-messages.js"></script>
 	<script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
+	<script src="http://aguirrel.github.io/ng-currency/dist/ng-currency.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-i18n/1.5.0/angular-locale_pt-br.js"></script>
 	<script src="ngclipboard.min.js"></script>
 	<script src="app.js"></script>
@@ -79,7 +80,7 @@
 			<div class="thumbnail">
 				<form class="form-inline" name="pedidoForm">
 					<div class="form-group edit">
-						<input class="form-control" type="text" ng-model="pedido.qtd" name="qtd" placeholder="Qtd" ng-required="true" aria-describedby="erro"/>
+						<input class="form-control" type="number" ng-model="pedido.qtd" name="qtd" placeholder="Qtd" ng-required="true" aria-describedby="erro" min="1"/>
 						<p id="erro" class="text-danger" ng-show="pedidoForm.qtd.$error.required">Por favor digite digite a quantidade.</p>
 					</div>
 					<div class="form-group edit">
@@ -104,7 +105,7 @@
 					</div>
 					<div class="form-group" ng-show="pgto == 'Dinheiro'">
 						<label>Se precisar de troco, digite o troco para:</label>
-						<input class="form-control" type="text" ng-model="troco" name="troco" placeholder="Digite o valor para o Troco" />
+						<input class="form-control" type="text" ng-model="troco" name="troco" placeholder="Digite o valor para o Troco" ng-currency/>
 					</div>
 						
 				</form>
